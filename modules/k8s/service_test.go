@@ -36,7 +36,7 @@ func TestGetServiceEReturnsCorrectServiceInCorrectNamespace(t *testing.T) {
 
 	uniqueID := strings.ToLower(random.UniqueId())
 	options := NewKubectlOptions("", "", uniqueID)
-	configData := fmt.Sprintf(EXAMPLE_DEPLOYMENT_YAML_TEMPLATE, uniqueID, uniqueID, uniqueID)
+	configData := fmt.Sprintf(EXAMPLE_DEPLOYMENT_WITH_SERVICE_YAML_TEMPLATE, uniqueID, uniqueID, uniqueID)
 	KubectlApplyFromString(t, options, configData)
 	defer KubectlDeleteFromString(t, options, configData)
 
@@ -50,7 +50,7 @@ func TestListServicesReturnsCorrectServiceInCorrectNamespace(t *testing.T) {
 
 	uniqueID := strings.ToLower(random.UniqueId())
 	options := NewKubectlOptions("", "", uniqueID)
-	configData := fmt.Sprintf(EXAMPLE_DEPLOYMENT_YAML_TEMPLATE, uniqueID, uniqueID, uniqueID)
+	configData := fmt.Sprintf(EXAMPLE_DEPLOYMENT_WITH_SERVICE_YAML_TEMPLATE, uniqueID, uniqueID, uniqueID)
 	KubectlApplyFromString(t, options, configData)
 	defer KubectlDeleteFromString(t, options, configData)
 
@@ -67,7 +67,7 @@ func TestWaitUntilServiceAvailableReturnsSuccessfullyOnNodePortType(t *testing.T
 
 	uniqueID := strings.ToLower(random.UniqueId())
 	options := NewKubectlOptions("", "", uniqueID)
-	configData := fmt.Sprintf(EXAMPLE_DEPLOYMENT_YAML_TEMPLATE, uniqueID, uniqueID, uniqueID)
+	configData := fmt.Sprintf(EXAMPLE_DEPLOYMENT_WITH_SERVICE_YAML_TEMPLATE, uniqueID, uniqueID, uniqueID)
 	KubectlApplyFromString(t, options, configData)
 	defer KubectlDeleteFromString(t, options, configData)
 
@@ -79,7 +79,7 @@ func TestGetServiceEndpointEReturnsAccessibleEndpointForNodePort(t *testing.T) {
 
 	uniqueID := strings.ToLower(random.UniqueId())
 	options := NewKubectlOptions("", "", uniqueID)
-	configData := fmt.Sprintf(EXAMPLE_DEPLOYMENT_YAML_TEMPLATE, uniqueID, uniqueID, uniqueID)
+	configData := fmt.Sprintf(EXAMPLE_DEPLOYMENT_WITH_SERVICE_YAML_TEMPLATE, uniqueID, uniqueID, uniqueID)
 	KubectlApplyFromString(t, options, configData)
 	defer KubectlDeleteFromString(t, options, configData)
 
@@ -102,7 +102,7 @@ func TestGetServiceEndpointEReturnsAccessibleEndpointForNodePort(t *testing.T) {
 	)
 }
 
-const EXAMPLE_DEPLOYMENT_YAML_TEMPLATE = `---
+const EXAMPLE_DEPLOYMENT_WITH_SERVICE_YAML_TEMPLATE = `---
 apiVersion: v1
 kind: Namespace
 metadata:
